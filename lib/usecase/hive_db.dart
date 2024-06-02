@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:auroth_notes/entity/note_entity.dart';
 
 class HiveDB {
-  final _myBox = Hive.box("notes");
+  final _myBox = Hive.box("notesBox");
 
   // load notes
   List<NoteEntity> loadNotes() {
@@ -33,6 +34,6 @@ class HiveDB {
 
       allNotesFormatted.add([id, title, content, createdAt]);
     }
-    _myBox.put("ALL_NOTES", allNotesFormatted);
+    
   }
 }

@@ -17,10 +17,10 @@ class _NotePageState extends State<NotePage> {
     TextEditingController contentController = TextEditingController();
     return showDialog<void>(
       context: ctx,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: true, // User can tap outside of the dialogue to 'cancel'
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add Note'),
+          title: const Text('Add New Note'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -47,6 +47,7 @@ class _NotePageState extends State<NotePage> {
                 style: TextStyle(color: Colors.red),
               ),
             ),
+            
             TextButton(
               child: const Text('Add'),
               onPressed: () {
@@ -60,6 +61,14 @@ class _NotePageState extends State<NotePage> {
                   NoteUsecase provider =
                       Provider.of<NoteUsecase>(context, listen: false);
                   provider.addNote(newNote);
+                } else {
+                  if (titleController.text.isNotEmpty == false) {
+                    print("Note title can't be empty!");
+                  
+                  } else if (contentController.text.isNotEmpty == false) {
+                    print("Note content can't be empty!");
+                  
+                  }
                 }
                 Navigator.of(context).pop();
               },
@@ -83,16 +92,16 @@ class _NotePageState extends State<NotePage> {
       builder: (context, provider, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.cyan,
             title: const Text(
-              "Notify",
+              "Auroth Notes",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
           ),
           body: provider.allNotes.isEmpty
-              ? const Center(child: Text("Empty"))
+              ? const Center(child: Text("No notes to show! Press the + button to write a note"))
               : ListView.builder(
                   itemCount: provider.allNotes.length,
                   itemBuilder: (context, index) {
@@ -101,7 +110,7 @@ class _NotePageState extends State<NotePage> {
                   },
                 ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.cyan,
             foregroundColor: Colors.white,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

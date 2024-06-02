@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auroth_notes/entity/note_entity.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart'; // For date formatting
 import 'package:auroth_notes/usecase/note_usecase.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart'; // For state management
 
+// This takes a `NoteEntity` object as an input and display its title, content and creation date
 class NoteCard extends StatefulWidget {
   final NoteEntity note;
   const NoteCard({super.key, required this.note});
@@ -22,7 +23,7 @@ class _NoteCardState extends State<NoteCard> {
           TextEditingController(text: note.content);
       return showDialog<void>(
         context: ctx,
-        barrierDismissible: false, // user must tap button!
+        barrierDismissible: true, // User can tap outside of the dialogue to 'cancel'
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Edit Note'),
@@ -117,20 +118,23 @@ class _NoteCardState extends State<NoteCard> {
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                     ),
+
                     Text(
                       widget.note.content,
                       style: TextStyle(color: Colors.grey[600], fontSize: 14),
-                      maxLines: 1,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                     ),
                   ],
                 ),
               ),
+
               Text(
-                DateFormat('dd/MM/yyyy').format(widget.note.createdAt),
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
+                DateFormat('EEE, dd/MM/yyyy').format(widget.note.createdAt),
+                style: const TextStyle(color: Colors.grey, fontSize: 12, fontStyle: FontStyle.italic), 
               )
+
             ],
           ),
         ),
