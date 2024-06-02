@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "620190800033",
+    "project_id": "auroth-notes",
+    "storage_bucket": "auroth-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620190800033:android:e96261a0440bfe82e078e0",
+        "android_client_info": {
+          "package_name": "com.aurothnotes.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmnyMecKCCMOIcazW65RL0lF7YA2h3wZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
